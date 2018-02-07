@@ -1,0 +1,9 @@
+back/node_modules/
+config.json
+.idea/
+node_modules/
+
+.npm
+.eslintcache
+.idea
+.DS_Store

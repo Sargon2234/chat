@@ -13,7 +13,7 @@ const routes = (app, db) => {
     res.pipe(readStream);
   });
   
-  app.get('/clients/online/:type', async (req, res) => {
+  app.get('/clients/:type', async (req, res) => {
     await MainController.getClients(req, res, db);
   });
 };

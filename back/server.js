@@ -10,6 +10,7 @@ const http = require('http'),
   port = process.env.port || 5000,
   host = process.env.host || 'localhost',
   routes = require('./Routes/main'),
+  socketListener = require('./src/socketEvents'),
   
   // If we have a lot of models we can define separate file, where we'd import/export our models, but according to current goal
   // there is no need to provide such functionality.
@@ -43,6 +44,8 @@ UserModel(db);
 
 // We send express app to use it's app.method functionality and db example for operations.
 routes(app, db);
+
+socketListener(socket, db);
 
 server.listen(port, () => {
   console.log(`Server started on http://${host}:${port}`);

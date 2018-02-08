@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "bufferutil": "^3.0.3",
     "socket.io": "^2.0.4",
+    "utf-8-validate": "^4.0.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.0.2",
     "vue-socket.io": "^2.1.1-b",

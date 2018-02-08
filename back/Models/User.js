@@ -8,6 +8,7 @@ module.exports = mongoose => {
     // It would be holder for data something like this: { user_id: [{message: '', direction: '', date: ''}] }
     history: { type: mongoose.Schema.Types.Mixed },
     isActive: Boolean,
+    // We have bots and users.
     type: String,
     // We set this field for better bot management. Bot we don't need behavior for users. So by default it will be null.
     behavior: { type: String, default: null },

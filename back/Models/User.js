@@ -12,6 +12,7 @@ module.exports = mongoose => {
     type: String,
     // We set this field for better bot management. Bot we don't need behavior for users. So by default it will be null.
     behavior: { type: String, default: null },
+    description: { type: String, maxlength: 500 },
   }, {
     timestamps: true,
   });

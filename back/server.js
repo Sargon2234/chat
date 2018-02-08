@@ -35,9 +35,7 @@ const socket = socketIO(server);
 // We'll declare mongo connection here to use it in DI with other modules.
 // Additional bonus, if we change database, for example to MySQL, we'll change code for connection in one place.
 const mongoURI = `mongodb://${config.db.mongo.user}:${config.db.mongo.password}@${config.db.mongo.host}:${config.db.mongo.port}/${config.db.mongo.name}?authSource=${config.db.mongo.name}`;
-const db = mongoose.connect(mongoURI, {
-  useMongoClient: true,
-});
+const db = mongoose.connect(mongoURI);
 
 // Send declared DB to model.
 UserModel(db);

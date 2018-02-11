@@ -107,7 +107,7 @@
         popups: {
           error: {
             active: false,
-            message: '#search-form:focus, #write-message > div > input:focus, #write-message > div > button:focus, .close-button:focus',
+            message: 'Something went wrong. Please try again later.',
           },
         },
         activeTab: 'online',
@@ -119,6 +119,7 @@
         this.activeTab = name;
       },
       setActiveUser(userName) {
+        this.scrollToEnd();
         const selectedUser = this.$store.state.activeUser.availableUsers.filter(user => user.name === userName);
 
         if (selectedUser) {
@@ -166,7 +167,13 @@
       },
       closePopup(which) {
         this.popups[which].active = false;
-      }
+      },
+      scrollToEnd: function () {
+        setTimeout(() => {
+          const container = document.querySelector('#chat');
+          container.scrollTop = container.scrollHeight;
+        }, 0);
+      },
     },
     computed: {
       isTyping() {
@@ -199,18 +206,19 @@
           if (!this.$store.state.activeUser.name) {
             this.$store.state.activeUser.name = receivedData.availableUser.name;
             this.$store.state.activeUser.history = receivedData.availableUser.history;
+            this.scrollToEnd();
           }
           this.$store.state.activeUser.availableUsers = receivedData.allUsers;
         }
       });
 
       this.$socket.on('usersChange', (msg) => {
-        console.log('Users change', JSON.parse(msg).allUsers);
         this.$store.state.activeUser.availableUsers = JSON.parse(msg).allUsers;
       });
 
       this.$socket.on('message_response', (msg) => {
         this.currentChat.typing = false;
+        this.scrollToEnd();
 
         const receivedData = JSON.parse(msg);
 
@@ -263,14 +271,14 @@
 
     #message {
         display: grid;
-        grid-template-rows: 170px 520px;
+        grid-template-rows: 170px 550px;
         position: relative;
         background-color: #add8e6;
     }
 
     #contact-data {
         display: grid;
-        grid-template-columns: 18% 82%;
+        grid-template-columns: 150px 100%;
         background-color: lightsteelblue;
     }
 
@@ -283,10 +291,12 @@
         background-color: #add8e6;
         max-height: 400px;
         overflow-y: scroll;
+        padding-bottom: 20px;
         margin-top: 20px;
     }
 
     #chat > ul {
+        padding-left: 0;
     }
 
     .speech-bubble {
@@ -294,9 +304,19 @@
         background: #ffffff;
         border-radius: 15px;
         height: 100px;
-        width: 800px;
+        max-width: 800px;
         display: grid;
-        grid-template-rows: 40px 60px;
+        grid-template-rows: 40px 60px;;
+    }
+
+    .speech-bubble.incoming {
+        float: left;
+        margin: 5px 30px 5px 35px;
+    }
+
+    .speech-bubble.outgoing {
+        float: right;
+        margin: 5px 45px 5px 0;
     }
 
     .outgoing:after {
@@ -372,26 +392,24 @@
 
     #write-message {
         position: absolute;
-        bottom: 35px;
-        left: 30px;
-        width: 815px;
+        bottom: 25px;
+        width: 100%;
         height: 90px;
     }
 
     #write-message > p {
         text-align: center;
         font-size: 13px;
-        position: absolute;
-        left: 50%;
     }
 
     #write-message > p > span {
         position: relative;
-        left: -50%;
     }
 
     #write-message > div {
         position: absolute;
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
         top: 40px;
         width: 100%;
     }
@@ -404,6 +422,9 @@
         box-sizing: border-box;
         border: 1px solid #ccc;
         font-size: 14px;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        margin-left: 20px;
     }
 
     #write-message > div > button, .close-button {
@@ -433,7 +454,7 @@
 
     #choose-partner {
         display: grid;
-        grid-template-rows: 40px 650px;
+        grid-template-rows: 40px 680px;
         position: relative;
     }
 
@@ -470,6 +491,7 @@
         list-style: none;
         height: 70px;
         cursor: pointer;
+        margin: 10px;
     }
 
     #contact-list > ul > li:hover {
@@ -480,7 +502,7 @@
         display: grid;
         height: 70px;
         margin: 5px 0 0 10px;
-        grid-template-columns: 20% 80%;
+        grid-template-columns: 70px 100%;
         position: relative;
     }
 
@@ -544,8 +566,9 @@
 
     #search {
         position: absolute;
-        bottom: 45px;
-        left: 20px;
+        bottom: 25px;
+        width: 100%;
+        text-align: center;
     }
 
     .popup {
@@ -595,5 +618,11 @@
 
     .close-button {
         float: none;
+    }
+
+    @media screen and (min-width: 1740px) {
+        #write-message > div > input {
+            margin-left: 25%;
+        }
     }
 </style>

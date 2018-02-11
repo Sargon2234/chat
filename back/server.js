@@ -10,8 +10,8 @@ const http = require('http'),
   port = process.env.port || 5000,
   host = process.env.host || 'localhost',
   routes = require('./Routes/main').routes,
-  socketListener = require('./src/socketEvents').listener,
-  bots = require('./src/Bots'),
+  socketListener = require('./Controllers/socketEvents').listener,
+  bots = require('./Controllers/Bots'),
   
   // If we have a lot of models we can define separate file, where we'd import/export our models, but according to current goal
   // there is no need to provide such functionality.
@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // To serve static files for built script.
 // In production env we should set up Nginx as reverse proxy for our application.
-app.use(express.static(path.resolve(__dirname, '../front')));
+app.use(express.static(path.resolve(__dirname, '../front/dist')));
 
 const server = http.createServer(app);
 const socket = socketIO(server);
@@ -42,7 +42,7 @@ const mongoURI = `mongodb://${config.db.mongo.user}:${config.db.mongo.password}@
   // Send declared DB to model.
   UserModel(db);
   // We send express app to use it's app.method functionality and db example for operations.
-  routes(app, db);
+  routes(app);
   
   socketListener(socket, db, bots);
 })();

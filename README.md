@@ -25,12 +25,13 @@ Tech stack:
 ### Installation:
 
 - `git clone https://github.com/Sargon2234/chat chat`,
-- `cd back`,
+- `cd chat`,
+- `cd back`
 - `npm i`,
 - Create `config.json` file in root and fill it with your credentials, just like in `config.example.json`,
 - Start mongodb,
-- In root run script to populate database with bots and test users: `node back/Models/populate/user.js`,
-- start server with `pm2 start back/server.js`
+- In back folder run script to populate database with bots and test users: `node Models/populate/user.js`,
+- start server with `pm2 start server.js`
 - go to [site](http://localhost:5000) and start chatting.
 
 

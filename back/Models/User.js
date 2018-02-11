@@ -5,8 +5,8 @@ module.exports = mongoose => {
     name: { type: String, unique: true },
     // It would be path to saved image in application.
     avatar: String,
-    // It would be holder for data something like this: { user_id: [{message: '', direction: '', date: ''}] }
-    history: { type: mongoose.Schema.Types.Mixed },
+    // We use Array type to use Mongo's multikey index.
+    history: Array,
     isActive: Boolean,
     // We have bots and users.
     type: String,
@@ -19,10 +19,11 @@ module.exports = mongoose => {
   
   // If we have a lot of users we can set indexes.
   // Probably best solution would be to add index for field isActive.
-  // What about history field? We save data with user_id, which provide us faster response to find chats with selected user.
   // So, probably, there is no need to index history field.
   // We'll use isActive a lot to find online users and show them in tabs
   userSchema.index({ isActive: 1 });
+  userSchema.index({ 'history.recipient': 1 });
+  userSchema.index({ 'history.sender': 1 });
   
   // Here we use regular function syntax because Mongoose documentation http://mongoosejs.com/docs/guide.html#statics said:
   // Do not declare statics using ES6 arrow functions (=>). Arrow functions explicitly prevent binding this, so the above examples will not work because of the value of this.

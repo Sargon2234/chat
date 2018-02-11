@@ -8,7 +8,7 @@ const defaultUserData = [
   {
     name: 'Echo bot',
     avatar: '/static/img/avatars/bot1.png',
-    history: [],
+    history: null,
     isActive: true,
     type: 'bot',
     behavior: 'echo',
@@ -17,7 +17,7 @@ const defaultUserData = [
   {
     name: 'Reverse bot',
     avatar: '/static/img/avatars/bot2.png',
-    history: [],
+    history: null,
     isActive: true,
     type: 'bot',
     behavior: 'reverse',
@@ -26,16 +26,16 @@ const defaultUserData = [
   {
     name: 'Spam bot',
     avatar: '/static/img/avatars/bot3.png',
-    history: [],
+    history: null,
     isActive: true,
     type: 'bot',
-    behavior: 'reverse',
+    behavior: 'spam',
     description: 'Aenean eu dictum diam. Nunc in sapien ac ligula vulputate dignissim. Suspendisse ornare nisi sapien.',
   },
   {
     name: 'Ignore bot',
     avatar: '/static/img/avatars/bot4.png',
-    history: [],
+    history: null,
     isActive: true,
     type: 'bot',
     behavior: 'ignore',

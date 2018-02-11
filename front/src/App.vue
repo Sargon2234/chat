@@ -26,20 +26,16 @@
 
     #app {
         display: grid;
-        grid-template-rows: 3% 95%;
+        grid-template-rows: 5% 95%;
+        height: 830px;
     }
 
     #header {
-        border-bottom: 1px solid black;
-    }
-
-    #header h1 {
-        margin-left: 79px;
-        margin-top: 30px;
+        margin-top: 10px;
     }
 
     .main-page {
         background-color: #586670;
-        min-height: 500px;
+        margin-top: 10px;
     }
 </style>

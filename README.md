@@ -31,7 +31,7 @@ Tech stack:
 - Start mongodb,
 - In root run script to populate database with bots and test users: `node back/Models/populate/user.js`,
 - start server with `pm2 start back/server.js`
-- go to [site](http://localhost:5000)
+- go to [site](http://localhost:5000) and start chatting.
 
 
 

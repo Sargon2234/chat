@@ -7,7 +7,7 @@ Tech stack:
 - Backend:
     - Node.js,
     - Express,
-    - Mongoose,
+    - MongoDB with Mongoose,
     - Socket.io,
     
     
@@ -26,10 +26,10 @@ Tech stack:
 
 - `git clone https://github.com/Sargon2234/chat chat`,
 - `cd chat`,
-- `cd back`
-- `npm i`,
 - Create `config.json` file in root and fill it with your credentials, just like in `config.example.json`,
 - Start mongodb,
+- `cd back`
+- `npm i`,
 - In back folder run script to populate database with bots and test users: `node Models/populate/user.js`,
 - start server with `pm2 start server.js`
 - go to [site](http://localhost:5000) and start chatting.
